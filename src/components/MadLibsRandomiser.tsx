@@ -1,7 +1,6 @@
 import { pickRandom } from "../utils/pickRandom";
 
 /**
-import { pickRandom } from '../utils/pickRandom';
  * Note: there's a duplication here between MadLibsCategories
  *  and the Props interface in MadLibsStory.
  *
@@ -18,7 +17,8 @@ interface RandomisationResult {
 }
 
 interface Props {
-  onRandomisation: (randomisationResult: RandomisationResult) => void;
+  handleRandomisationResult: (randomisationResult: RandomisationResult) => void;
+  buttonText: string;
 }
 
 const programmingTerms = ["state", "React", "TypeScript", "how to Google"];
@@ -34,7 +34,7 @@ const ingVerbs = [
 const websites = ["Reddit", "BBC News", "MySpace", "Spotify"];
 const adjectives = ["polished", "quick", "empty", "musical"];
 
-function MadLibsRandomiser({ onRandomisation }: Props) {
+function MadLibsRandomiser({ buttonText, handleRandomisationResult }: Props) {
   /**
    *
    * Note: implicit return of object needs parentheses (),
@@ -51,10 +51,10 @@ function MadLibsRandomiser({ onRandomisation }: Props) {
       adjective: pickRandom(adjectives),
     };
 
-    onRandomisation(randomisationResult);
+    handleRandomisationResult(randomisationResult);
   };
 
-  return <button onClick={handleRandomisation}>Randomise story!</button>;
+  return <button onClick={handleRandomisation}>{buttonText}</button>;
 }
 
 export default MadLibsRandomiser;
